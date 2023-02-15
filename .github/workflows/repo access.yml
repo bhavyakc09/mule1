@@ -1,0 +1,36 @@
+name: Slash Command Dispatch
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  slashCommandDispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slash Command Dispatch
+        uses: peter-evans/slash-command-dispatch@v2
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          commands: build
+          issue-type: pull-request
+          
+name: Build Command
+on:
+  repository_dispatch:
+    types: [build-command]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the pull request branch
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.client_payload.pull_request.head.ref }}
+          path: ${{ github.event.repository.name }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+      - uses: actions/checkout@v2
+        with:
+          repository: backend-repo
+          ref: ${{ github.event.client_payload.slash_command.args.named.ref }}
+          path: backend-repo
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
