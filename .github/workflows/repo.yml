@@ -1,4 +1,4 @@
-name: Mixed inputs
+name: Mixed inputs with Build
 
 on:
   workflow_dispatch:
@@ -25,13 +25,6 @@ jobs:
     - name: Send greeting
       run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
 
-name: Build Command
-
-on:
-  repository_dispatch:
-    types: [build-command]
-    
-jobs:
   build:
     runs-on: ubuntu-latest
     steps:
