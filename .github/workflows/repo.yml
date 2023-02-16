@@ -1,8 +1,9 @@
 name: Mixed inputs with Build
 
-on: [pull_request]
-
-      name:
+on:
+  pull_request:
+     inputs:
+       name:
         type: choice
         description: Who to greet
         options: 
