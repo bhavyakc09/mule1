@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
-      pull-request: write
+      pull_request: write
     steps:
     - name: Send greeting
       run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
