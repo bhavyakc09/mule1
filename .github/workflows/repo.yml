@@ -2,7 +2,7 @@ name: Mixed inputs with Build
 
 on:
   pull_request:
-    inputs:
+    branches:
       name:
         type: choice
         description: Who to greet
