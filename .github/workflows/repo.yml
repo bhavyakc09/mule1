@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       name:
+        run: |
         type: choice
         description: Who to greet
         options: 
