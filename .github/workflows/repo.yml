@@ -20,7 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Send greeting
-      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
+      with:
+        repository: ${{ github.event.inputs.message }} 
+        ref: ${{ fromJSON('["", ""]')[github.event.inputs.use-emoji == 'true'] }} 
+        path: ${{ github.event.inputs.name }}"
 
   build:
     runs-on: ubuntu-latest
@@ -28,5 +31,8 @@ jobs:
       # Checkout the pull request branch
       - uses: actions/checkout@v3
       - name: Environment settings interface
-        id: environment
-        run: echo "${{ github.event.client_payload.pull_request.head.repo.full_name }} ${{ github.event.client_payload.pull_request.head.ref }} ${{ github.event.repository.name }} ${{ secrets.REPO_ACCESS_TOKEN }}
+        with:
+          repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.client_payload.pull_request.head.ref }}
+          path: ${{ github.event.repository.name }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
