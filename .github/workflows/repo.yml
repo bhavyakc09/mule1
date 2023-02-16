@@ -1,9 +1,9 @@
 name: Mixed inputs with Build
 
 on:
-  pull_request:
-     inputs:
-       name:
+  workflow_dispatch:
+    inputs:
+      name:
         type: choice
         description: Who to greet
         options: 
