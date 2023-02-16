@@ -1,7 +1,7 @@
 name: Mixed inputs with Build
 
 on:
-  workflow_dispatch:
+  pull_request:
     inputs:
       name:
         type: choice
