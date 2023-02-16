@@ -14,3 +14,17 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         issue-message: "Message that will be displayed on users' first issue"
         pr-message: "Message that will be displayed on users' first pull request"
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the pull request branch
+      - uses: actions/checkout@v3
+      - name: Environment settings interface
+        uses: cloudposse/github-action-interface-environment@0.2.0
+        id: environment
+        with:
+          repository: ${{ github.event.client_payload.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.client_payload.pull_request.head.ref }}
+          path: ${{ github.event.repository.name }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
